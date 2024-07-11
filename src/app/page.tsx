@@ -1,4 +1,27 @@
 import Image from "next/image";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore"; 
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBwP5OKAbAcyjLvFcLV44Nif2ZVPmc9eUU",
+  authDomain: "garuda-hacks-27649.firebaseapp.com",
+  projectId: "garuda-hacks-27649",
+  storageBucket: "garuda-hacks-27649.appspot.com",
+  messagingSenderId: "699660083630",
+  appId: "1:699660083630:web:8fc326ea703bac9de3e83f",
+  measurementId: "G-27KEVG44Z9"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function getData() {
+  const querySnapshot = await getDocs(collection(db, "users"));
+  const usersData = querySnapshot.docs.map(doc => doc.data());
+  console.log(usersData);
+}
+
+getData();
 
 export default function Home() {
   return (
