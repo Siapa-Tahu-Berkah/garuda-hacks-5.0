@@ -1,9 +1,6 @@
 "use client"
-
 import * as React from "react";
 import Image from "next/image";
-
-import donation from "@/assets/donation.webp";
 import village from "@/assets/village.webp";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -45,7 +42,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between py-24">
+    <main className="flex min-h-screen flex-col items-center justify-between pb-32">
       <div className="z-10 w-full items-center justify-between">
         <div className="relative h-96">
           <Image src={village} alt="Donation" layout="fill" objectFit="cover" />
@@ -75,12 +72,12 @@ export default function Home() {
           </div>
         </div>
         <div className="space-y-4 max-w-6xl mx-auto">
-          <h3 className="text-2xl font-semibold mt-8">Hello</h3>
+          <h3 className="text-2xl font-semibold mt-12">Hello</h3>
           <div className="flex space-x-7">
-            <div className="w-2/5 p-4 border border-gray-200 rounded-lg shadow">
+            <div className="w-2/5 p-5 border border-gray-200 rounded-lg shadow">
               <h4 className="text-xl font-semibold mb-3">Your Mission</h4>
               <div className="space-y-4">
-                <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
+                <div className="p-5 border-gray-300 rounded-lg bg-gray-50">
                   <p className="text-sm font-semibold text-gray-600">Donation</p>
                 </div>
                 <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
