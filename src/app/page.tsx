@@ -10,13 +10,14 @@ import Lottie from "lottie-react";
 import animationData1 from "@/assets/donation-animation.json";
 import animationData2 from "@/assets/good-animation.json";
 import { initializeApp } from "firebase/app";
+
 import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore"; 
 import { db } from "@/app/form/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore"; 
 
 const getData = async () => {
   const querySnapshot = await getDocs(collection(db, "users"));
-  const usersData = querySnapshot.docs.map(doc => doc.data());
+  const usersData = querySnapshot.docs.map((doc) => doc.data());
   console.log(usersData);
 }
 
