@@ -43,7 +43,9 @@ const Navbar = () => {
           </SheetTrigger>
           <SheetContent side="left">
             <Link href="/" prefetch={false}>
-              <h3 className="text-2xl font-bold">LOGO</h3>
+              <h3 className="text-2xl font-bold">
+                WeShare
+              </h3>
             </Link>
             <div className="grid gap-2 py-6">
               <Link
@@ -70,12 +72,14 @@ const Navbar = () => {
             </div>
           </SheetContent>
         </Sheet>
-        <Link href="/" className="mr-6 hidden lg:flex" prefetch={false}>
-          <h3 className="text-2xl font-bold">LOGO</h3>
+        <Link href="/" className="hidden lg:flex" prefetch={false}>
+          <h3 className="text-2xl font-bold">
+            WeShare
+          </h3>
         </Link>
         <div className="flex w-full justify-center">
           <NavigationMenu className="hidden lg:flex">
-            <NavigationMenuList>
+            <NavigationMenuList className="text-black">
               <NavigationMenuLink asChild>
                 <Link
                   href="/"
@@ -134,8 +138,5 @@ function MenuIcon(props: any) {
     </svg>
   );
 }
-
-
-
 
 export default Navbar;
