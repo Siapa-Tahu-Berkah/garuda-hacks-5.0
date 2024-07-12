@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { midtransSnap } from "../config/midtrans";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/app/page";
+import { db } from "../../form/firebaseConfig";
 
 export const GET = async () => {
   return NextResponse.json("Masuk bang");
