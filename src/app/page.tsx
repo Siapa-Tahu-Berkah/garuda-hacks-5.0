@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import village from "@/assets/village.webp";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -61,26 +62,27 @@ export default function Home() {
               Create your own happiness to keep you at peace
             </h4>
             <div className="flex space-x-4 pt-4">
-              <Button className="bg-blue-600 hover:bg-blue-600 text-white opacity-95">
-                Donate
+              <Button className="bg-blue-600 hover:bg-white text-white hover:text-blue-600 opacity-95">
+                <Link href="/donate">
+                  Donate
+                </Link>
               </Button>
-              <Button variant="outline">Documentation</Button>
             </div>
           </div>
           <div className="absolute bottom-0 opacity-80 w-full bg-[#17c3b2] p-4 flex flex-col sm:flex-row justify-center items-center">
             <div className="text-center mx-20">
               <FaPeopleCarryBox className="inline-block text-3xl" />
-              <p className="text-sm font-bold">Total donator: xxx</p>
+              <p className="text-sm font-bold">Donator: 1000+</p>
             </div>
             <div className="w-full sm:w-px h-[0.5px] sm:h-9 my-5 sm:my-0 bg-black"></div>
             <div className="text-center mx-20">
               <GiReceiveMoney className="inline-block text-3xl" />
-              <p className="text-sm font-bold">Total donation: xxx</p>
+              <p className="text-sm font-bold">Donation: IDR 20M++</p>
             </div>
             <div className="w-full sm:w-px h-[0.5px] sm:h-9 my-5 sm:my-0 bg-black"></div>
             <div className="text-center mx-20">
               <FaPeopleRoof className="inline-block text-3xl" />
-              <p className="text-sm font-bold">Total helped: xx</p>
+              <p className="text-sm font-bold">Helped: 1500+</p>
             </div>
           </div>
         </div>
@@ -131,10 +133,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </div>
-        <div className="space-y-4 max-w-6xl mx-auto">
-          <hr className="w-full border-t-2 border-gray-400 mt-20 mb-12" />
-          <h3 className="text-2xl font-semibold text-center">Shop</h3>
         </div>
       </div>
       <div className="max-w-6xl w-full px-8 xl:px-0 mx-auto" id="shop">

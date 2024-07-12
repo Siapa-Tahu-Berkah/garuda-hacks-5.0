@@ -133,7 +133,7 @@ const DonationPage = (params: any) => {
 
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-gray-100">
-      <img src="/image/donate.png" className="absolute inset-0 w-full h-full object-cover z-0" alt="Donation background" />
+      <img src="/image/donate.webp" className="absolute inset-0 w-full h-full object-cover z-0" alt="Donation background" />
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative z-10  max-w-md mx-auto bg-white  rounded-lg shadow-xl p-8 w-96">
         <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Enter Amount</h2>
