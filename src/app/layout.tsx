@@ -18,7 +18,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <Navbar /> */}
       <body className={`${mulish.className} bg-[#f5f5f5] hidescroll`}>
         <Navbar />
         {children}
