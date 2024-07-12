@@ -100,7 +100,6 @@ export default function Home() {
         <div className="space-y-4 max-w-6xl mx-auto">
           <hr className="w-full border-t-2 border-gray-400 mt-24 mb-16" />
           <h3 className="text-3xl font-semibold text-center">Shop</h3>
-
         </div>
       </div>
     </main>
