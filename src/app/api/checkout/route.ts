@@ -1,6 +1,13 @@
 import { db } from "../../form/firebaseConfig";
 import { getUserBasket, updateBasket } from "@/app/service/basket";
-import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { midtransSnap } from "../config/midtrans";
 import { NextResponse } from "next/server";
 
@@ -12,6 +19,8 @@ const getTransactionId = async (basketData: any, user_id: string) => {
     type: "shop",
   });
 
+  console.log("Transaction >>>>>>>>>>>", transaction.id);
+
   return transaction.id;
 };
 
@@ -19,13 +28,22 @@ export const POST = async (req: Request) => {
   const body = await req.json();
   const { user_id } = body;
 
-  const basket = await getUserBasket();
+  const basket = await getUserBasket(user_id);
 
   const itemData = basket.map((data: any) => {
     return { price: data.price, name: data.name, quantity: data.taken_amount };
   });
 
-  const transaction = getTransactionId(basket, user_id);
+  itemData.map(async (data: any) => {
+    const itemDoc = doc(db, "items", data.item_id);
+
+    await updateDoc(itemDoc, {
+      amount: data.amount - data.taken_amount,
+    });
+  });
+
+  const transaction = await getTransactionId(basket, user_id);
+  console.log("checkout transaction >>>>>>>>>>>>>>>>", transaction);
 
   const gross_amount = basket
     .map((data: any) => {

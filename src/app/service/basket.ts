@@ -11,12 +11,35 @@ import {
   where,
 } from "firebase/firestore";
 
-export const addItemToBasket = async (user_id?: string, item_id?: string) => {
-  await addDoc(collection(db, "user_basket"), {
-    user_id: user_id,
-    item_id: item_id,
-    taken_amount: 1,
-  });
+export const addItemToBasket = async (
+  user_id?: string,
+  item_id?: string,
+  quantity?: number
+) => {
+  const basketQuery = query(
+    collection(db, "user_basket"),
+    where("user_id", "==", user_id),
+    where("item_id", "==", item_id)
+  );
+
+  const basketSnapshot = await getDocs(basketQuery);
+  let basket: any = basketSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  if (basketSnapshot.docs.length == 0) {
+    await addDoc(collection(db, "user_basket"), {
+      user_id: user_id,
+      item_id: item_id,
+      taken_amount: quantity || 1,
+    });
+  } else {
+    const basketDoc = doc(db, "user_basket", basket[0].id);
+    await updateDoc(basketDoc, {
+      taken_amount: basket[0].taken_amount + quantity,
+    });
+  }
 };
 
 export const updateBasket = async (basket_id: string, quantity?: number) => {
@@ -66,4 +89,30 @@ export const getUserBasket = async (user_id?: string) => {
   });
 
   return itemDetails;
+};
+
+export const deleteBasket = async (user_id: string) => {
+  console.log("masuk ke delete >>>>>>>>>");
+  const queryDoc = query(
+    collection(db, "user_basket"),
+    where("user_id", "==", user_id)
+  );
+
+  console.log("user id >>>>>>>>>>>>>>>>>>>>>>>>", user_id);
+
+  const snapShot = await getDocs(queryDoc);
+
+  console.log(snapShot);
+
+  const basket_id = snapShot.docs.map((doc: any) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
+  console.log("baseket yg dihapus >>>>>>>>>>>>>>", basket_id);
+
+  basket_id.map(async (data) => {
+    const docRef = doc(db, "user_basket", data.id);
+    await deleteDoc(docRef);
+  });
 };

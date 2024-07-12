@@ -53,87 +53,93 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto bg-white">
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg"
-      >
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="amount"
-          >
-            Amount
-          </label>
-          <input
-            type="text"
-            id="amount"
-            name="amount"
-            value={form.amount}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="picture"
-          >
-            Picture
-          </label>
-          <input
-            type="file"
-            id="picture"
-            name="picture"
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="price"
-          >
-            Price
-          </label>
-          <input
-            type="text"
-            id="price"
-            name="price"
-            value={form.price}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    <div className="my-16 px-8 xl:px-0">
+      <div className="max-w-6xl mx-auto bg-white shadow-md rounded-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-md mx-auto px-6 py-12 xl:px-0 bg-white"
         >
-          Add Item
-        </button>
-      </form>
 
-      
+          <div className="mb-4">
+            <h1 className="text-xl font-bold text left">Add Shop Item</h1>
+          </div>
+         
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="name"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              className="text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="price"
+            >
+              Price
+            </label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value={form.price}
+              onChange={handleChange}
+              className="text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="amount"
+            >
+              Amount
+            </label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              value={form.amount}
+              onChange={handleChange}
+              className="text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="picture"
+            >
+              Picture
+            </label>
+            <input
+              type="file"
+              id="picture"
+              name="picture"
+              onChange={handleChange}
+              className="text-sm shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+          
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Add
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
