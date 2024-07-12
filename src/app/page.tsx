@@ -10,11 +10,16 @@ import Lottie from "lottie-react";
 import animationData1 from "@/assets/donation-animation.json";
 import animationData2 from "@/assets/good-animation.json";
 import { initializeApp } from "firebase/app";
+import Shop from "@/components/shop";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const [progress, setProgress] = React.useState(13);
 
   React.useEffect(() => {
+    const user_id = Cookies.get("id");
+    console.log("user_id", user_id);
+
     const timer = setTimeout(() => setProgress(66), 500);
     return () => clearTimeout(timer);
   }, []);
@@ -22,7 +27,6 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between pb-32 ">
       <div className="z-10 w-full items-center justify-between">
-
         <div className="relative h-96">
           <Image
             src={village}
@@ -40,7 +44,9 @@ export default function Home() {
               Create your own happiness to keep you at peace
             </h4>
             <div className="flex space-x-4 pt-4">
-              <Button className="bg-blue-600 hover:bg-blue-600 text-white">Donate</Button>
+              <Button className="bg-blue-600 hover:bg-blue-600 text-white">
+                Donate
+              </Button>
               <Button variant="outline">Documentation</Button>
             </div>
           </div>
@@ -62,7 +68,9 @@ export default function Home() {
           </div>
         </div>
         <div className="space-y-4 max-w-6xl mx-auto px-8 xl:px-0">
-          <h3 className="text-2xl font-bold mt-12 text-center sm:text-left">Hello</h3>
+          <h3 className="text-2xl font-bold mt-12 text-center sm:text-left">
+            Hello
+          </h3>
           <div className="flex flex-col sm:flex-row space-y-7 sm:space-y-0 sm:space-x-7">
             <div className="w-full sm:w-2/5 p-5 border border-gray-200 rounded-lg shadow">
               <h4 className="text-xl font-semibold mb-3">Your Mission</h4>
@@ -86,7 +94,6 @@ export default function Home() {
                   <Progress value={progress} />
                 </div>
               </div>
-
               <p className="text-sm text-center sm:text-left text-gray-400">
                 It is very important to know who you are. To make decisions. To
                 show who you are.
@@ -110,14 +117,14 @@ export default function Home() {
         <div className="space-y-4 max-w-6xl mx-auto">
           <hr className="w-full border-t-2 border-gray-400 mt-24 mb-16" />
           <h3 className="text-3xl font-semibold text-center">Shop</h3>
-
         </div>
       </div>
-
       <div className="max-w-6xl w-full px-8 xl:px-0 mx-auto">
         <div className="h-px w-full bg-black my-16"></div>
         <div className="w-full">
-          <h2 className="text-black text-2xl font-bold mb-4 text-center sm:text-left">Shop</h2>
+          <h2 className="text-black text-2xl font-bold mb-4 text-center sm:text-left">
+            Shop
+          </h2>
         </div>
       </div>
       <div className="max-w-6xl px-8 xl:px-0 mx-auto">
