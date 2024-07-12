@@ -115,17 +115,12 @@ const DonationPage = () => {
 
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-gray-100">
-      <img src="/image/donate.png" className="absolute inset-0 w-full h-full object-cover z-0 blur-sm" alt="Donation background" />
-      <div className="relative z-10 w-full max-w-md mx-auto bg-white bg-opacity-90 rounded-lg shadow-xl p-8">
-        <h2 className="text-3xl font-bold text-center text-green-600 mb-6">Make a Donation</h2>
+      <img src="/image/donate.png" className="absolute inset-0 w-full h-full object-cover z-0" alt="Donation background" />
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="relative z-10  max-w-md mx-auto bg-white  rounded-lg shadow-xl p-8 w-96">
+        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Enter Amount</h2>
         <form className="space-y-6" onSubmit={onSubmit}>
           <div>
-            <label
-              htmlFor="amount"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Donation Amount (Rp)
-            </label>
             <input
               type="number"
               id="amount"
@@ -138,13 +133,13 @@ const DonationPage = () => {
               placeholder="Enter amount in Rupiah"
             />
           </div>
-          <div className="flex justify-between space-x-4">
-            {["10000", "15000", "25000"].map((value) => (
+          <div className="grid justify-between grid-cols-3 ">
+            {["10000", "15000", "25000", "50000", "75000", "100000", ].map((value) => (
               <button
                 key={value}
                 type="button"
                 onClick={() => handlePresetAmount(value)}
-                className="flex-1 bg-green-100 text-green-700 py-2 px-4 rounded-md hover:bg-green-200 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                className="flex-1 bg-blue-100 text-blue-700 text-sm w-24 h-12 px-2 m-2 rounded-md hover:bg-blue-700 hover:text-white transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[#33c2b4] focus:bg-[#28978c] focus:text-white focus:ring-opacity-50"
               >
                 Rp {new Intl.NumberFormat('id-ID').format(parseInt(value))}
               </button>
@@ -152,7 +147,7 @@ const DonationPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+            className="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-800 transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
           >
             Donate Now
           </button>
