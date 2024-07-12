@@ -60,11 +60,11 @@ const Voucher: React.FC = () => {
       <div className="bg-[#c2d8b9] h-48 flex flex-col justify-center items-center">
         <h1 className="text-4xl font-bold text-center ">VOUCHER</h1>
         <p className="text-center font-light ">
-          dapatkan vouchers spesial & kode promo
+        Get special vouchers & promo codes
         </p>
       </div>
-      <div className="container max-w-6xl">
-        <p className="my-2 mt-8">Temukan koleksi voucher terbaik disini !</p>
+      <div className="container max-w-6xl mb-20">
+        <p className="my-2 mt-8">Find the best voucher collection here!</p>
         <div className=" mx-auto justify-center cursor-pointer items-center min-h-screen grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {vouchers.map((voucher) => (
             <div
