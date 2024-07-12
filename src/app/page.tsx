@@ -12,20 +12,33 @@ import animationData2 from "@/assets/good-animation.json";
 import { initializeApp } from "firebase/app";
 import Shop from "@/components/shop";
 import Cookies from "js-cookie";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./form/firebaseConfig";
 
 export default function Home() {
   const [progress, setProgress] = React.useState(13);
   const [user_id, setUserId] = React.useState<string | null>(null);
   const [user_name, setUserName] = React.useState<string | null>("");
 
-  React.useEffect(() => {
+  const getUser = async () => {
     const user_id = Cookies.get("id");
     const user_name = Cookies.get("name")
+    if (user_id) {
+      const userDoc = doc(db, "users", user_id);
+      const snapShotUser = await getDoc(userDoc);
+      const user = snapShotUser.data();
+      console.log(user);
+      setUser(user || "");
+    }
 
-    setUserId(user_id || null);
-    setUserName(user_name || null);
     const timer = setTimeout(() => setProgress(66), 500);
     return () => clearTimeout(timer);
+  };
+
+  React.useEffect(() => {
+    getUser();
+    // const timer = setTimeout(() => setProgress(66), 500);
+    // return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -93,12 +106,12 @@ export default function Home() {
             </div>
             <div className="w-full sm:w-3/5 space-y-3">
               <div className="p-4 border border-gray-200 rounded-lg shadow">
-                <h4 className="text-xl font-semibold mb-2">Current Points</h4>
+                <h4 className="text-xl font-semibold mb-2">Your Point</h4>
                 <div className="w-full">
-                  <Progress value={progress} className="bg-gray-300" />
+                  <Progress value={userData?.point || 0} />
                 </div>
               </div>
-              <p className="text-sm text-center sm:text-left text-gray-400">
+              {/* <p className="text-sm text-center sm:text-left text-gray-400">
                 It is very important to know who you are. To make decisions. To
                 show who you are.
               </p>
@@ -114,7 +127,7 @@ export default function Home() {
                   />
                   <p className="text-center text-sm font-medium">Kindness</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

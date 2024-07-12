@@ -5,6 +5,8 @@ export const POST = async (req: Request, res: Response) => {
   const body = await req.json();
   const { user, user_id, token } = body;
 
+  console.log("Setting cookies for user:", user);
+
   cookies().set({
     name: "token",
     value: token || "",
@@ -30,5 +32,6 @@ export const POST = async (req: Request, res: Response) => {
     value: user_id,
     maxAge: 60 * 60 * 24 * 1, // 1 day
   });
-  NextResponse.json("cookie added");
+
+  return NextResponse.json("cookie added");
 };
