@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, FormEvent } from "react";
 
 declare global {
@@ -7,9 +8,10 @@ declare global {
   }
 }
 
-const DonationPage = () => {
+const DonationPage = (params: any) => {
   const [amount, setAmount] = useState("");
   const [snapToken, setSnapToken] = useState<string | null>(null);
+  const router = useRouter();
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -60,6 +62,7 @@ const DonationPage = () => {
       console.log("Initializing Snap payment with token:", snapToken);
       window.snap.pay(snapToken, {
         onSuccess: async (res: any) => {
+          router.push("/voucher");
           console.log("Payment successful. Response:", res);
           try {
             // First, send the payment notification
@@ -94,8 +97,13 @@ const DonationPage = () => {
             // }
           } catch (error) {
             console.error("Error in onSuccess handler:", error);
-            if (error instanceof TypeError && error.message === "Failed to fetch") {
-              console.error("Network error or API route not accessible. Please check your server and network connection.");
+            if (
+              error instanceof TypeError &&
+              error.message === "Failed to fetch"
+            ) {
+              console.error(
+                "Network error or API route not accessible. Please check your server and network connection."
+              );
             }
           }
         },
@@ -108,6 +116,16 @@ const DonationPage = () => {
       });
     }
   }, [snapToken, amount]);
+
+  useEffect(() => {
+    if (
+      params.searchParams.order_id &&
+      params.searchParams.status_code == "200" &&
+      params.searchParams.transaction_status == "settlement"
+    ) {
+      router.push("/vote");
+    }
+  }, []);
 
   const handlePresetAmount = (value: string) => {
     setAmount(value);
