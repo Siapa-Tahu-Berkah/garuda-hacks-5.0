@@ -1,4 +1,4 @@
-import { db } from "@/app/page";
+import { db } from "../../form/firebaseConfig";
 import { getUserBasket, updateBasket } from "@/app/service/basket";
 import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
 import { midtransSnap } from "../config/midtrans";
