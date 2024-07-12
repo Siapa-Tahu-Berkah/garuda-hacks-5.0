@@ -15,11 +15,15 @@ import Cookies from "js-cookie";
 
 export default function Home() {
   const [progress, setProgress] = React.useState(13);
+  const [user_id, setUserId] = React.useState<string | null>(null);
+  const [user_name, setUserName] = React.useState<string | null>("");
 
   React.useEffect(() => {
     const user_id = Cookies.get("id");
-    console.log("user_id", user_id);
+    const user_name = Cookies.get("name")
 
+    setUserId(user_id || null);
+    setUserName(user_name || null);
     const timer = setTimeout(() => setProgress(66), 500);
     return () => clearTimeout(timer);
   }, []);
@@ -69,7 +73,7 @@ export default function Home() {
         </div>
         <div className="space-y-4 max-w-6xl mx-auto px-8 xl:px-0">
           <h3 className="text-2xl font-bold mt-12 text-center sm:text-left">
-            Hello
+            Hello {user_name || "Guest"}
           </h3>
           <div className="flex flex-col sm:flex-row space-y-7 sm:space-y-0 sm:space-x-7">
             <div className="w-full sm:w-2/5 p-5 border border-gray-200 rounded-lg shadow">
@@ -89,9 +93,9 @@ export default function Home() {
             </div>
             <div className="w-full sm:w-3/5 space-y-3">
               <div className="p-4 border border-gray-200 rounded-lg shadow">
-                <h4 className="text-xl font-semibold mb-2">Current XP</h4>
+                <h4 className="text-xl font-semibold mb-2">Current Points</h4>
                 <div className="w-full">
-                  <Progress value={progress} />
+                  <Progress value={progress} className="bg-gray-300" />
                 </div>
               </div>
               <p className="text-sm text-center sm:text-left text-gray-400">
