@@ -17,10 +17,12 @@ import { db } from "./form/firebaseConfig";
 
 export default function Home() {
   const [progress, setProgress] = React.useState(13);
-  const [userData, setUser] = React.useState<any>();
+  const [user_id, setUserId] = React.useState<string | null>(null);
+  const [user_name, setUserName] = React.useState<string | null>("");
 
   const getUser = async () => {
     const user_id = Cookies.get("id");
+    const user_name = Cookies.get("name")
     if (user_id) {
       const userDoc = doc(db, "users", user_id);
       const snapShotUser = await getDoc(userDoc);
@@ -28,6 +30,9 @@ export default function Home() {
       console.log(user);
       setUser(user || "");
     }
+
+    const timer = setTimeout(() => setProgress(66), 500);
+    return () => clearTimeout(timer);
   };
 
   React.useEffect(() => {
@@ -81,7 +86,7 @@ export default function Home() {
         </div>
         <div className="space-y-4 max-w-6xl mx-auto px-8 xl:px-0">
           <h3 className="text-2xl font-bold mt-12 text-center sm:text-left">
-            Hello
+            Hello {user_name || "Guest"}
           </h3>
           <div className="flex flex-col sm:flex-row space-y-7 sm:space-y-0 sm:space-x-7">
             <div className="w-full sm:w-2/5 p-5 border border-gray-200 rounded-lg shadow">
@@ -126,12 +131,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="space-y-4 max-w-6xl mx-auto">
-          <hr className="w-full border-t-2 border-gray-400 mt-24 mb-16" />
-          <h3 className="text-3xl font-semibold text-center">Shop</h3>
-        </div>
       </div>
-      <div className="max-w-6xl w-full px-8 xl:px-0 mx-auto">
+
+      <div className="max-w-6xl w-full px-8 xl:px-0 mx-auto" id="shop">
         <div className="h-px w-full bg-black my-16"></div>
         <div className="w-full">
           <h2 className="text-black text-2xl font-bold mb-4 text-center sm:text-left">
