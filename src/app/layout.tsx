@@ -7,7 +7,7 @@ import Footer from "@/components/footer";
 const mulish = Mulish({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Blessed",
+  title: "WeShare",
   description: "God bless you",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={mulish.className}>
+      <body className={`${mulish.className} bg-[#f5f5f5] scroll-smooth`}>
         <Navbar />
         {children}
         <Footer />

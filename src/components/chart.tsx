@@ -39,7 +39,6 @@ const chartData = rawData.map(item => ({
 
 const chartConfig = {
   total: {
-    label: "",
     color: "#284b63",
   },
   mobile: {

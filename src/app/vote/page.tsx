@@ -1,9 +1,94 @@
-const Vote = () => {
+"use client";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  updateDoc,
+} from "firebase/firestore";
+import Card from "../../components/card";
+import Chart from "../../components/chart";
+import Countdown from "../../components/countdown";
+import { db } from "../form/firebaseConfig";
+import { useEffect, useState } from "react";
+
+const houseData = [
+  {
+    id: 1,
+    houseUrl: "/image/workshop.jpg",
+    type: "Workshop",
+    activity_type: "skill",
+    description:
+      "is an event aimed at helping underprivileged communities by making and selling crafts, which will later be led by the same community groups.",
+  },
+  {
+    id: 2,
+    houseUrl: "/image/medical_checkup.jpg",
+    type: "Medical Check Up",
+    activity_type: "health",
+    description:
+      "is a free event to help underprivileged and underprivileged communities check their health.",
+  },
+  {
+    id: 3,
+    houseUrl: "/image/makan.webp",
+    type: "Free Food",
+    activity_type: "food",
+    description:
+      "is an event that provides free meals with the aim of improving nutrition for underprivileged communities.",
+  },
+];
+
+export default function Vote() {
+  const [voted, setVoted] = useState(false);
+  const [activity, setActivity] = useState<any>();
+  const voteActivity = async (activity_type: string) => {
+    const activityQuery = query(
+      collection(db, "activity"),
+      orderBy("batch", "desc"),
+      limit(1)
+    );
+
+    const activityDoc = await getDocs(activityQuery);
+
+    const activityData_id = activityDoc.docs[0].id;
+    const activityData = activityDoc.docs[0].data();
+
+    console.log("activity", activityData);
+    console.log("update", { [activity_type]: activityData[activity_type] + 1 });
+    console.log(activityData_id);
+
+    const itemDoc = doc(db, "activity", activityData_id);
+
+    await updateDoc(itemDoc, {
+      [activity_type]: activityData[activity_type] + 1,
+    });
+
+    setVoted(true);
+  };
+
+  const getActivity = async () => {
+    const activityQuery = query(
+      collection(db, "activity"),
+      orderBy("batch", "desc"),
+      limit(1)
+    );
+
+    const activityDoc = await getDocs(activityQuery);
+    const activityData = activityDoc.docs[0].data();
+    setActivity(activityData);
+    console.log(activityData);
+  };
+
+  useEffect(() => {
+    getActivity();
+  });
+
   return (
     <div>
-<<<<<<< Updated upstream
-      <h1>Vote</h1>
-=======
       <div className="mx-auto max-w-6xl pt-20 pb-28">
         <div className="text-center">
           <h2 className="text-4xl font-bold">Let&apos;s Vote</h2>
@@ -15,14 +100,19 @@ const Vote = () => {
         </div>
         <div className="flex justify-center items-center py-8">
           <div className="grid grid-cols-3 gap-5">
-            {houseData.map(({ id, houseUrl, type, description }) => (
-              <Card
-                key={id}
-                houseUrl={houseUrl}
-                type={type}
-                description={description}
-              />
-            ))}
+            {houseData.map(
+              ({ id, houseUrl, type, description, activity_type }) => (
+                <Card
+                  voted={voted}
+                  key={id}
+                  houseUrl={houseUrl}
+                  type={type}
+                  description={description}
+                  activity_type={activity_type}
+                  handleClick={voteActivity}
+                />
+              )
+            )}
           </div>
         </div>
         <hr className="my-16 h-px border-slate-500" />
@@ -84,9 +174,6 @@ const Vote = () => {
           </div>
         </div>
       </div>
->>>>>>> Stashed changes
     </div>
-  )
+  );
 }
-
-export default Vote;
