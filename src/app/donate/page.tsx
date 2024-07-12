@@ -106,7 +106,7 @@ const DonationPage = (params: any) => {
   return (
     <div className="relative w-full min-h-screen flex items-center justify-center bg-gray-100">
       <img
-        src="/image/donate.png"
+        src="/image/donate.webp"
         className="absolute inset-0 w-full h-full object-cover z-0"
         alt="Donation background"
       />
