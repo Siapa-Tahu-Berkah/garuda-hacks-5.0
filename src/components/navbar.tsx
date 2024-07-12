@@ -169,15 +169,13 @@ const Navbar = () => {
               <TbShoppingCart className="w-6 h-6 text-black" />
           </Link>
           {user_id && (
-            <Link href="/profile">
-              <Button variant="ghost" className="flex items-center p-0 w-8 h-8">
-                <img
-                  src={user_photo || "/image/profile/default-profile-photo.jpg"}
-                  alt="Profile"
-                  className="object-cover w-8 h-8 rounded-full"
-                />
-              </Button>
-            </Link>
+            <Button variant="ghost" className="flex items-center p-0 w-8 h-8">
+              <img
+                src={user_photo || "/image/profile/default-profile-photo.jpg"}
+                alt="Profile"
+                className="object-cover w-8 h-8 rounded-full"
+              />
+            </Button>
           )}
         </div>
       </nav>
