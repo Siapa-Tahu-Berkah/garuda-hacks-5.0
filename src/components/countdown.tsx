@@ -57,7 +57,7 @@ const Countdown: NextPage = () => {
                   className="flex flex-col justify-center items-center"
                   key={index}
                 >
-                  <div className="mt-2 p-2 bg-[#C2D8B9] w-12 h-12 flex justify-center items-center">{t}</div>
+                  <div className="mt-2 p-2 bg-[#1d3557] w-12 h-12 flex justify-center items-center text-white">{t}</div>
                   <div className="label font-semibold">
                     {" "}
                     {index === 0

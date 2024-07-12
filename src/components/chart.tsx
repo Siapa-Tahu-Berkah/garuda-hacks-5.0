@@ -39,15 +39,14 @@ const chartData = rawData.map(item => ({
 
 const chartConfig = {
   total: {
-    label: "",
-    color: "#C2D8B9",
+    color: "#284b63",
   },
   mobile: {
     label: "",
-    color: "#C2D8B9",
+    color: "#284b63",
   },
   label: {
-    color: "#C2D8B9",
+    color: "#FFFFFF",
   },
 } satisfies ChartConfig;
 
@@ -100,7 +99,7 @@ const Chart = () => {
                 position="right"
                 offset={8}
                 className="fill-foreground font-semibold text-base"
-                formatter={(value: any) => `${value}%`} // format label to show percentage
+                formatter={(value: any) => `${value}%`}
               />
             </Bar>
           </BarChart>

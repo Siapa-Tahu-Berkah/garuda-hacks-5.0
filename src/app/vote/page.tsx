@@ -125,12 +125,12 @@ export default function Vote() {
           <div className="max-w-6xl mx-auto w-100 flex">
             <div className="flex flex-col items-center w-1/3">
               <div className="relative w-full flex justify-center items-center mt-16">
-                <div className="h-1 w-full bg-emerald-400"></div>
-                <div className="absolute w-6 h-6 rounded-full bg-emerald-400 z-10 text-white text-center">
+                <div className="h-1 w-full bg-[#1d3557]"></div>
+                <div className="absolute w-6 h-6 rounded-full bg-[#1d3557] z-10 text-white text-center">
                   1
                 </div>
               </div>
-              <div className="w-72 h-20 bg-emerald-400 rounded-md p-4 mt-5">
+              <div className="w-72 h-20 bg-[#1d3557] rounded-md p-4 mt-5">
                 <h3 className="text-white text-xl font-semibold">
                   July 27, 2024
                 </h3>
@@ -141,12 +141,12 @@ export default function Vote() {
             </div>
             <div className="flex flex-col items-center w-1/3">
               <div className="relative w-full flex justify-center items-center mt-16">
-                <div className="h-1 w-full bg-emerald-400"></div>
-                <div className="absolute w-6 h-6 rounded-full bg-emerald-400 z-10 text-white text-center">
+                <div className="h-1 w-full bg-[#1d3557]"></div>
+                <div className="absolute w-6 h-6 rounded-full bg-[#1d3557] z-10 text-white text-center">
                   2
                 </div>
               </div>
-              <div className="w-72 h-20 bg-emerald-400 rounded-md p-4 mt-5">
+              <div className="w-72 h-20 bg-[#1d3557] rounded-md p-4 mt-5">
                 <h3 className="text-white text-xl font-semibold">
                   August 31, 2024
                 </h3>
@@ -157,12 +157,12 @@ export default function Vote() {
             </div>
             <div className="flex flex-col items-center w-1/3">
               <div className="relative w-full flex justify-center items-center mt-16">
-                <div className="h-1 w-full bg-emerald-400"></div>
-                <div className="absolute w-6 h-6 rounded-full bg-emerald-400 z-10 text-white text-center">
+                <div className="h-1 w-full bg-[#1d3557]"></div>
+                <div className="absolute w-6 h-6 rounded-full bg-[#1d3557] z-10 text-white text-center">
                   3
                 </div>
               </div>
-              <div className="w-72 h-20 bg-emerald-400 rounded-md p-4 mt-5">
+              <div className="w-72 h-20 bg-[#1d3557] rounded-md p-4 mt-5">
                 <h3 className="text-white text-xl font-semibold">
                   September 14, 2024
                 </h3>

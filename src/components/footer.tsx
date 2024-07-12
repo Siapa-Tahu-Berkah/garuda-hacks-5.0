@@ -63,7 +63,7 @@ const Footer = () => {
       <h1 className="text-center text-4xl text-white font-bold mt-20 mb-12">
         Sponsored by
       </h1>
-      <div className="mx-auto max-w-6xl grid grid-cols-3">
+      <div className="mx-auto max-w-6xl grid grid-cols-3 mb-10">
         {data.map((item: any, idx) => (
           <div key={idx} className="m-5 flex justify-center">
             <Image
@@ -76,8 +76,9 @@ const Footer = () => {
           </div>
         ))}
       </div>
+      <hr />
       <div className="text-center text-white mt-4">
-        &copy; 2024 Blessed | All Rights Reserved
+        &copy; 2024 WeShare | All Rights Reserved
       </div>
     </footer>
   );

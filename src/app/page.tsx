@@ -45,44 +45,43 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between pb-32 ">
       <div className="z-10 w-full items-center justify-between">
-        <div className="relative h-96">
+        <div className="relative h-[33rem]">
           <Image
             src={village}
-            alt="Donation"
+            alt="village"
             layout="fill"
             objectFit="cover"
-            className="brightness-[0.6]"
+            className="brightness-[0.6] opacity-80"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2">
             <h2 className="text-white text-4xl font-bold">
               Let&apos;s Donate!
             </h2>
-
             <h4 className="text-white text-center text-xl font-normal">
               Create your own happiness to keep you at peace
             </h4>
             <div className="flex space-x-4 pt-4">
-              <Button className="bg-blue-600 hover:bg-blue-600 text-white">
+              <Button className="bg-blue-600 hover:bg-blue-600 text-white opacity-95">
                 Donate
               </Button>
               <Button variant="outline">Documentation</Button>
             </div>
           </div>
-        </div>
-        <div className="bg-emerald-300 p-4 flex flex-col sm:flex-row justify-center items-center">
-          <div className="text-center mx-20">
-            <FaPeopleCarryBox className="inline-block text-3xl" />
-            <p className="text-sm font-medium">Total donator: xxx</p>
-          </div>
-          <div className="w-full sm:w-px h-[0.5px] sm:h-9 my-5 sm:my-0 bg-black"></div>
-          <div className="text-center mx-20">
-            <GiReceiveMoney className="inline-block text-3xl" />
-            <p className="text-sm font-medium">Total donation: xxx</p>
-          </div>
-          <div className="w-full sm:w-px h-[0.5px] sm:h-9 my-5 sm:my-0 bg-black"></div>
-          <div className="text-center mx-20">
-            <FaPeopleRoof className="inline-block text-3xl" />
-            <p className="text-sm font-medium">Total helped: xx</p>
+          <div className="absolute bottom-0 opacity-80 w-full bg-[#17c3b2] p-4 flex flex-col sm:flex-row justify-center items-center">
+            <div className="text-center mx-20">
+              <FaPeopleCarryBox className="inline-block text-3xl" />
+              <p className="text-sm font-bold">Total donator: xxx</p>
+            </div>
+            <div className="w-full sm:w-px h-[0.5px] sm:h-9 my-5 sm:my-0 bg-black"></div>
+            <div className="text-center mx-20">
+              <GiReceiveMoney className="inline-block text-3xl" />
+              <p className="text-sm font-bold">Total donation: xxx</p>
+            </div>
+            <div className="w-full sm:w-px h-[0.5px] sm:h-9 my-5 sm:my-0 bg-black"></div>
+            <div className="text-center mx-20">
+              <FaPeopleRoof className="inline-block text-3xl" />
+              <p className="text-sm font-bold">Total helped: xx</p>
+            </div>
           </div>
         </div>
         <div className="space-y-4 max-w-6xl mx-auto px-8 xl:px-0">
@@ -93,13 +92,13 @@ export default function Home() {
             <div className="w-full sm:w-2/5 p-5 border border-gray-200 rounded-lg shadow">
               <h4 className="text-xl font-semibold mb-3">Your Mission</h4>
               <div className="space-y-4">
-                <div className="p-5 border-gray-300 rounded-lg bg-gray-50">
-                  <p className="text-sm font-semibold text-gray-600">
+                <div className="p-5 border-gray-300 rounded-lg bg-[#ced4da] opacity-90">
+                  <p className="text-sm font-semibold">
                     Donation
                   </p>
                 </div>
-                <div className="p-4 border-gray-300 rounded-lg bg-gray-50">
-                  <p className="text-sm font-semibold text-gray-600">
+                <div className="p-4 border-gray-300 rounded-lg bg-[#ced4da] opacity-90">
+                  <p className="text-sm font-semibold">
                     Purchased
                   </p>
                 </div>
@@ -132,6 +131,10 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="space-y-4 max-w-6xl mx-auto">
+          <hr className="w-full border-t-2 border-gray-400 mt-20 mb-12" />
+          <h3 className="text-2xl font-semibold text-center">Shop</h3>
         </div>
       </div>
       <div className="max-w-6xl w-full px-8 xl:px-0 mx-auto" id="shop">
