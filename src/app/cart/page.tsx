@@ -2,49 +2,65 @@
 
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { getUserBasket } from "../service/basket";
+import { deleteBasket, getUserBasket, updateBasket } from "../service/basket";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
-const Cart = () => {
+const Cart = (params?: any) => {
   const [user_id, setUserId] = useState<string | null>(null);
   const [basketItems, setBasketItems] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [snapToken, setSnapToken] = useState();
+  const router = useRouter();
 
   const formatPrice = (price: number): string => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
 
   const handleIncrement = (index: number) => {
-    setBasketItems((prevItems) => {
-      const newItems = [...prevItems];
-      newItems[index].taken_amount = newItems[index].taken_amount +1;
-      return newItems;
-    });
+    updateBasket(basketItems[index].id, basketItems[index].taken_amount + 1);
+
+    let newItems = [...basketItems];
+    newItems[index].taken_amount += 1;
+
+    setBasketItems(newItems);
   };
 
   const handleDecrement = (index: number) => {
-    setBasketItems((prevItems) => {
-      const newItems = [...prevItems];
-      newItems[index].taken_amount = newItems[index].taken_amount -1;
-      return newItems;
-    });
+    updateBasket(basketItems[index].id, basketItems[index].taken_amount - 1);
+
+    let newItems = [...basketItems];
+    newItems[index].taken_amount -= 1;
+
+    setBasketItems(newItems);
   };
 
   const handleCheckout = async () => {
     if (!user_id) return;
 
-    const response = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const response = await fetch("http://localhost:3000/api/checkout", {
+      method: "POST",
       body: JSON.stringify({ user_id }),
     });
 
     const data = await response.json();
 
-    if (data?.token) {
-      window.snap.pay(data.token);
+    setSnapToken(data);
+
+    // if (data?.token) {
+    //   window.snap.pay(data.token);
+    // }
+  };
+
+  const getBasketData = () => {
+    const id = Cookies.get("id");
+    setUserId(id || null);
+
+    if (id) {
+      getUserBasket(id).then((items) => {
+        // const combinedItems = combineDuplicateItems(items);
+        setBasketItems(items);
+      });
     }
   };
 
@@ -55,8 +71,8 @@ const Cart = () => {
 
     if (id) {
       getUserBasket(id).then((items) => {
-        const combinedItems = combineDuplicateItems(items);
-        setBasketItems(combinedItems);
+        // const combinedItems = combineDuplicateItems(items);
+        setBasketItems(items);
         setLoading(false);
       });
     } else {
@@ -64,19 +80,73 @@ const Cart = () => {
     }
   }, []);
 
-  const combineDuplicateItems = (items: any[]) => {
-    const itemMap: { [key: string]: any } = {};
+  useEffect(() => {
+    const loadSnap = () => {
+      const script = document.createElement("script");
+      script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
+      script.setAttribute(
+        "data-client-key",
+        process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY as string
+      );
+      script.onload = () => {
+        console.log("Snap.js loaded");
+      };
+      document.body.appendChild(script);
+    };
 
-    items.forEach((item) => {
-      if (itemMap[item.item_id]) {
-        itemMap[item.item_id].taken_amount += item.taken_amount;
-      } else {
-        itemMap[item.item_id] = { ...item };
-      }
+    if (!window.snap) {
+      loadSnap();
+    }
+
+    if (snapToken && window.snap) {
+      console.log("Initializing Snap payment with token:", snapToken);
+      window.snap.pay(snapToken, {
+        onSuccess: async (res: any) => {
+          console.log("Payment successful. Response:", res);
+          try {
+            // First, send the payment notification
+            console.log("Sending payment notification...");
+          } catch (error) {
+            console.error("Error in onSuccess handler:", error);
+            if (
+              error instanceof TypeError &&
+              error.message === "Failed to fetch"
+            ) {
+              console.error(
+                "Network error or API route not accessible. Please check your server and network connection."
+              );
+            }
+          }
+        },
+        onPending: (res: any) => {
+          console.log("Payment pending. Response:", res);
+        },
+        onError: (err: any) => {
+          console.error("Payment error. Error:", err);
+        },
+      });
+    }
+  }, [snapToken]);
+
+  const handleDelete = async () => {
+    await fetch("http://localhost:3000/api/cart", {
+      method: "DELETE",
     });
 
-    return Object.values(itemMap);
+    setBasketItems([]);
+    await router.push("/shop");
   };
+
+  useEffect(() => {
+    if (
+      params.searchParams.order_id &&
+      params.searchParams.status_code == "200" &&
+      params.searchParams.transaction_status == "settlement"
+    ) {
+      console.log("terhapus");
+      handleDelete();
+    }
+  }, []);
 
   return (
     <div className="px-8 xl:px-0 py-8">
@@ -119,8 +189,7 @@ const Cart = () => {
                         <div className="flex items-center">
                           <Button
                             className="px-3 h-10 bg-white rounded-none rounded-l-lg text-black border hover:text-white"
-                            onClick={() => handleDecrement(index)}
-                          >
+                            onClick={() => handleDecrement(index)}>
                             -
                           </Button>
                           <div className="flex items-center justify-center w-10 h-10 border-t border-b">
@@ -128,8 +197,7 @@ const Cart = () => {
                           </div>
                           <Button
                             className="px-3 h-10 bg-white rounded-none rounded-r-lg text-black border hover:text-white"
-                            onClick={() => handleIncrement(index)}
-                          >
+                            onClick={() => handleIncrement(index)}>
                             +
                           </Button>
                         </div>
@@ -145,7 +213,9 @@ const Cart = () => {
                 </tbody>
               </table>
               <div className="mt-4 flex justify-end">
-                <Button className="px-6 py-2 bg-blue-600 text-white rounded-lg" onClick={handleCheckout}>
+                <Button
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg"
+                  onClick={handleCheckout}>
                   Checkout
                 </Button>
               </div>

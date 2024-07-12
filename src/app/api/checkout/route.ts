@@ -19,6 +19,8 @@ const getTransactionId = async (basketData: any, user_id: string) => {
     type: "shop",
   });
 
+  console.log("Transaction >>>>>>>>>>>", transaction.id);
+
   return transaction.id;
 };
 
@@ -26,7 +28,7 @@ export const POST = async (req: Request) => {
   const body = await req.json();
   const { user_id } = body;
 
-  const basket = await getUserBasket();
+  const basket = await getUserBasket(user_id);
 
   const itemData = basket.map((data: any) => {
     return { price: data.price, name: data.name, quantity: data.taken_amount };
@@ -40,7 +42,8 @@ export const POST = async (req: Request) => {
     });
   });
 
-  const transaction = getTransactionId(basket, user_id);
+  const transaction = await getTransactionId(basket, user_id);
+  console.log("checkout transaction >>>>>>>>>>>>>>>>", transaction);
 
   const gross_amount = basket
     .map((data: any) => {
