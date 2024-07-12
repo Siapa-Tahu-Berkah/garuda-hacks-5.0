@@ -33,7 +33,7 @@ export const updateBasket = async (basket_id: string, quantity?: number) => {
 export const getUserBasket = async (user_id?: string) => {
   const queryDoc = query(
     collection(db, "user_basket"),
-    where("user_id", "==", "0o16klykhMjBTz0PFqj0")
+    where("user_id", "==", user_id)
   );
 
   const snapShot = await getDocs(queryDoc);

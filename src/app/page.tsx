@@ -11,11 +11,15 @@ import animationData1 from "@/assets/donation-animation.json";
 import animationData2 from "@/assets/good-animation.json";
 import { initializeApp } from "firebase/app";
 import Shop from "@/components/shop";
+import Cookies from "js-cookie";
 
 export default function Home() {
   const [progress, setProgress] = React.useState(13);
 
   React.useEffect(() => {
+    const user_id = Cookies.get("id");
+    console.log("user_id", user_id);
+
     const timer = setTimeout(() => setProgress(66), 500);
     return () => clearTimeout(timer);
   }, []);
