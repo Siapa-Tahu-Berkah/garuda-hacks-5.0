@@ -25,6 +25,8 @@ export default function Home() {
   const getUser = async () => {
     const user_id = Cookies.get("id");
     const user_name = Cookies.get("name");
+    setUserId(user_id || null);
+    setUserName(user_name || null);
     if (user_id) {
       const userDoc = doc(db, "users", user_id);
       const snapShotUser = await getDoc(userDoc);
@@ -63,9 +65,7 @@ export default function Home() {
             </h4>
             <div className="flex space-x-4 pt-4">
               <Button className="bg-blue-600 hover:bg-white text-white hover:text-blue-600 opacity-95">
-                <Link href="/donate">
-                  Donate
-                </Link>
+                <Link href="/donate">Donate</Link>
               </Button>
             </div>
           </div>
@@ -88,21 +88,17 @@ export default function Home() {
         </div>
         <div className="space-y-4 max-w-6xl mx-auto px-8 xl:px-0">
           <h3 className="text-2xl font-bold mt-12 text-center sm:text-left">
-            Hello {user_name || "Guest"}
+            Hello, {user_name || "Guest"}!
           </h3>
           <div className="flex flex-col sm:flex-row space-y-7 sm:space-y-0 sm:space-x-7">
             <div className="w-full sm:w-2/5 p-5 border border-gray-200 rounded-lg shadow">
               <h4 className="text-xl font-semibold mb-3">Your Mission</h4>
               <div className="space-y-4">
                 <div className="p-5 border-gray-300 rounded-lg bg-[#ced4da] opacity-90">
-                  <p className="text-sm font-semibold">
-                    Donation
-                  </p>
+                  <p className="text-sm font-semibold">Donation</p>
                 </div>
                 <div className="p-4 border-gray-300 rounded-lg bg-[#ced4da] opacity-90">
-                  <p className="text-sm font-semibold">
-                    Purchased
-                  </p>
+                  <p className="text-sm font-semibold">Purchased</p>
                 </div>
               </div>
             </div>
@@ -111,7 +107,10 @@ export default function Home() {
                 <h4 className="text-xl font-semibold mb-2">Your Point:</h4>
                 <div className="w-full flex space-x-1">
                   <h1 className="font-bold text-4xl">{userData?.point || 0}</h1>
-                  <span className="self-end font-semibold text-lg">{" "}/ {userData?.point > 100 ? "500" : "100" }</span>
+                  <span className="self-end font-semibold text-lg">
+                    {" "}
+                    / {userData?.point > 100 ? "500" : "100"}
+                  </span>
                 </div>
               </div>
               <p className="text-sm text-center sm:text-left text-gray-400">
