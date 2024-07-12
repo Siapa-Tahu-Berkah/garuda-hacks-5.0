@@ -1,4 +1,4 @@
-import { db } from "@/app/page";
+import { db } from "../form/firebaseConfig";
 import {
   addDoc,
   collection,
