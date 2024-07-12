@@ -19,10 +19,11 @@ export default function Home() {
   const [progress, setProgress] = React.useState(13);
   const [user_id, setUserId] = React.useState<string | null>(null);
   const [user_name, setUserName] = React.useState<string | null>("");
+  const [userData, setUser] = React.useState<any>();
 
   const getUser = async () => {
     const user_id = Cookies.get("id");
-    const user_name = Cookies.get("name")
+    const user_name = Cookies.get("name");
     if (user_id) {
       const userDoc = doc(db, "users", user_id);
       const snapShotUser = await getDoc(userDoc);
@@ -97,7 +98,7 @@ export default function Home() {
                     Donation
                   </p>
                 </div>
-                <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
+                <div className="p-4 border-gray-300 rounded-lg bg-gray-50">
                   <p className="text-sm font-semibold text-gray-600">
                     Purchased
                   </p>
@@ -106,12 +107,13 @@ export default function Home() {
             </div>
             <div className="w-full sm:w-3/5 space-y-3">
               <div className="p-4 border border-gray-200 rounded-lg shadow">
-                <h4 className="text-xl font-semibold mb-2">Your Point</h4>
-                <div className="w-full">
-                  <Progress value={userData?.point || 0} />
+                <h4 className="text-xl font-semibold mb-2">Your Point:</h4>
+                <div className="w-full flex space-x-1">
+                  <h1 className="font-bold text-4xl">{userData?.point || 0}</h1>
+                  <span className="self-end font-semibold text-lg">{" "}/ {userData?.point > 100 ? "500" : "100" }</span>
                 </div>
               </div>
-              {/* <p className="text-sm text-center sm:text-left text-gray-400">
+              <p className="text-sm text-center sm:text-left text-gray-400">
                 It is very important to know who you are. To make decisions. To
                 show who you are.
               </p>
@@ -127,7 +129,7 @@ export default function Home() {
                   />
                   <p className="text-center text-sm font-medium">Kindness</p>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </div>

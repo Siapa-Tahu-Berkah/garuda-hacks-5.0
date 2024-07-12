@@ -7,7 +7,7 @@ import Footer from "@/components/footer";
 const mulish = Mulish({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Blessed",
+  title: "WeShare",
   description: "God bless you",
 };
 
