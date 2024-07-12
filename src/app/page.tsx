@@ -5,9 +5,12 @@ import Image from "next/image";
 import donation from "@/assets/donation.webp";
 import village from "@/assets/village.webp";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/progress";
 import { FaPeopleCarryBox, FaPeopleRoof } from "react-icons/fa6";
 import { GiReceiveMoney } from "react-icons/gi";
+import Lottie from "lottie-react";
+import animationData1 from "@/assets/donation-animation.json";
+import animationData2 from "@/assets/good-animation.json";
 
 export default function Home() {
   const [progress, setProgress] = React.useState(13)
@@ -72,6 +75,16 @@ export default function Home() {
                 It is very important to know who you are.
                 To make decisions. To show who you are.
               </p>
+              <div className="flex">
+                <div>
+                  <Lottie animationData={animationData1} className="w-36" />
+                  <p className="text-center text-sm font-medium">Generous</p>
+                </div>
+                <div>
+                  <Lottie animationData={animationData2} className="w-14 mt-6" />
+                  <p className="text-center text-sm font-medium">Kindness</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
