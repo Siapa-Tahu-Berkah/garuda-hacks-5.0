@@ -10,7 +10,6 @@ import Lottie from "lottie-react";
 import animationData1 from "@/assets/donation-animation.json";
 import animationData2 from "@/assets/good-animation.json";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore"; 
 import { db } from "@/app/form/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore"; 
 
@@ -33,13 +32,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between pb-32">
       <div className="z-10 w-full items-center justify-between">
-        <div className="relative h-96">
-          <Image src={village} alt="Donation" layout="fill" objectFit="cover" />
+        <div className="relative h-[500px]">
+          <Image src={village} alt="Village" layout="fill" objectFit="cover" />
           <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2">
             <h2 className="text-white text-4xl font-bold">Let&apos;s Donate!</h2>
             <h4 className="text-white text-xl font-normal">Create your own happiness to keep you at peace</h4>
             <div className="flex space-x-4 pt-4">
-              <Button variant="outline">Donate</Button>
+              <Button className="bg-blue-600 hover:bg-blue-600 text-white">Donate</Button>
               <Button variant="outline">Documentation</Button>
             </div>
           </div>
@@ -61,7 +60,7 @@ export default function Home() {
           </div>
         </div>
         <div className="space-y-4 max-w-6xl mx-auto">
-          <h3 className="text-2xl font-semibold mt-12">Hello</h3>
+          <h3 className="text-3xl font-semibold mt-12">Hello</h3>
           <div className="flex space-x-7">
             <div className="w-2/5 p-5 border border-gray-200 rounded-lg shadow">
               <h4 className="text-xl font-semibold mb-3">Your Mission</h4>
@@ -69,7 +68,7 @@ export default function Home() {
                 <div className="p-5 border-gray-300 rounded-lg bg-gray-50">
                   <p className="text-sm font-semibold text-gray-600">Donation</p>
                 </div>
-                <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
+                <div className="p-5 border-gray-300 rounded-lg bg-gray-50">
                   <p className="text-sm font-semibold text-gray-600">Purchased</p>
                 </div>
               </div>
@@ -97,6 +96,11 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="space-y-4 max-w-6xl mx-auto">
+          <hr className="w-full border-t-2 border-gray-400 mt-24 mb-16" />
+          <h3 className="text-3xl font-semibold text-center">Shop</h3>
+
         </div>
       </div>
     </main>
