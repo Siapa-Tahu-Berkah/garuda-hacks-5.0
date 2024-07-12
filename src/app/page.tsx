@@ -19,6 +19,7 @@ export default function Home() {
   const [progress, setProgress] = React.useState(13);
   const [user_id, setUserId] = React.useState<string | null>(null);
   const [user_name, setUserName] = React.useState<string | null>("");
+  const [userData, setUser] = React.useState<any>({});
 
   const getUser = async () => {
     const user_id = Cookies.get("id");
@@ -132,7 +133,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <div className="max-w-6xl w-full px-8 xl:px-0 mx-auto" id="shop">
         <div className="h-px w-full bg-black my-16"></div>
         <div className="w-full">
