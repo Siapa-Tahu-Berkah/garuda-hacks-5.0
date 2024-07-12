@@ -73,4 +73,9 @@
     margin: 0;
     box-sizing: border-box;
   }
+
+  .image-zoom-when-hover > img {
+    transition: transform 0.5s;
+    scale: 1.2;
+  }
 }
