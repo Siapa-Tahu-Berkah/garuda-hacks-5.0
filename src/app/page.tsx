@@ -86,7 +86,6 @@ export default function Home() {
                   <Progress value={progress} />
                 </div>
               </div>
-
               <p className="text-sm text-center sm:text-left text-gray-400">
                 It is very important to know who you are. To make decisions. To
                 show who you are.
@@ -110,10 +109,8 @@ export default function Home() {
         <div className="space-y-4 max-w-6xl mx-auto">
           <hr className="w-full border-t-2 border-gray-400 mt-24 mb-16" />
           <h3 className="text-3xl font-semibold text-center">Shop</h3>
-
         </div>
       </div>
-
       <div className="max-w-6xl w-full px-8 xl:px-0 mx-auto">
         <div className="h-px w-full bg-black my-16"></div>
         <div className="w-full">
