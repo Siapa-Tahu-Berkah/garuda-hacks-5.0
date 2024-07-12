@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { ItemData } from "@/interface/ItemData";
@@ -13,6 +13,25 @@ interface ShopDetailProps {
 }
 
 const ShopDetail: React.FC<ShopDetailProps> = ({ product }) => {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleIncrement = () => {
+    const amount = parseInt(product.amount);
+    setQuantity((prev) => prev + 1);
+
+    if (quantity >= amount) {
+      setQuantity(amount);
+    }
+  };
+
+  const handleDecrement = () => {
+    setQuantity((prev) => prev - 1);
+
+    if (quantity <= 1) {
+      setQuantity(1);
+    }
+  };
+
   useEffect(() => {
     Fancybox.bind("[data-fancybox]", {});
 
@@ -43,7 +62,9 @@ const ShopDetail: React.FC<ShopDetailProps> = ({ product }) => {
                 <p className="text-xl font-bold">Rp. {product.price}</p>
               </div>
               <div className="text-black">
-                <p className="text-base font-semibold">Stock: {product.amount}</p>
+                <p className="text-base font-semibold">
+                  Stock: {product.amount}
+                </p>
                 {parseInt(product.amount) <= 5 && (
                   <p className="text-sm font-medium text-red-500">*Low stock</p>
                 )}
@@ -58,7 +79,14 @@ const ShopDetail: React.FC<ShopDetailProps> = ({ product }) => {
                 <p className="text-sm font-medium text-red-500">*Low stock</p>
               )}
             </div>
-            <Button className="w-full mt-5" onClick={addItemToBasket()}>Add To Cart</Button>
+            <div className="my-3 flex">
+              <Button className="px-3 h-10 bg-white rounded-none rounded-l-lg text-black border hover:text-white" onClick={handleDecrement}>-</Button>
+              <div className="flex items-center justify-center w-10 h-10 border-t border-b">{quantity}</div>
+              <Button className="px-3 h-10 bg-white rounded-none rounded-r-lg text-black border hover:text-white" onClick={handleIncrement}>+</Button>
+            </div>
+            <Button className="w-full mt-5" onClick={() => addItemToBasket()}>
+              Add To Cart
+            </Button>
           </div>
         </div>
       </div>

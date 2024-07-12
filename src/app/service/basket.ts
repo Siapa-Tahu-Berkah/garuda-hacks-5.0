@@ -11,11 +11,11 @@ import {
   where,
 } from "firebase/firestore";
 
-export const addItemToBasket = async (user_id?: string, item_id?: string) => {
+export const addItemToBasket = async (user_id?: string, item_id?: string, quantity?: number) => {
   await addDoc(collection(db, "user_basket"), {
     user_id: user_id,
     item_id: item_id,
-    taken_amount: 1,
+    taken_amount: quantity || 1,
   });
 };
 
