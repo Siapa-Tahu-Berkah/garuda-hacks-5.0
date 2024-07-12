@@ -1,6 +1,16 @@
 import { NextResponse } from "next/server";
 import { midtransSnap } from "../config/midtrans";
-import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../../form/firebaseConfig";
 import { cookies } from "next/headers";
 
@@ -30,7 +40,9 @@ const updateDonationAmount = async (amount: number) => {
         donation_amount: newAmount,
       });
 
-      console.log(`Donation updated. New total: ${newAmount}, Donation number: ${newDonationNumber}`);
+      console.log(
+        `Donation updated. New total: ${newAmount}, Donation number: ${newDonationNumber}`
+      );
       return NextResponse.json({ newAmount });
     } else {
       console.error("Donation document not found");
@@ -49,31 +61,40 @@ export async function POST(req: Request) {
 
     console.log("Received request:", { donation_amount, action });
 
-    if (action === "update_donation") {
-      try {
-        const { newAmount, newDonationNumber } = await updateDonationAmount(parseInt(donation_amount));
-        console.log("Donation updated successfully:", { newAmount, newDonationNumber });
-        return NextResponse.json({ success: true, newAmount, newDonationNumber });
-      } catch (error) {
-        console.error("Error updating donation amount:", error);
-        return NextResponse.json({ error: "Failed to update donation amount" }, { status: 500 });
-      }
-    }
-
-    const userCookie = cookies().get('id');
+    const userCookie = cookies().get("id");
     const user_id = userCookie ? userCookie.value : null;
 
     if (!user_id) {
-      return NextResponse.json({ error: "User not authenticated" }, { status: 401 });
+      return NextResponse.json(
+        { error: "User not authenticated" },
+        { status: 401 }
+      );
     }
 
-    const transaction = await getTransactionId(
-      {
-        price: donation_amount,
-        name: "donation",
-        quantity: 1,
-      }
+    const transaction = await getTransactionId({
+      price: donation_amount,
+      name: "donation",
+      quantity: 1,
+    });
+
+    const donationQuery = query(
+      collection(db, "donation"),
+      orderBy("batch", "desc"),
+      limit(1)
     );
+
+    const donationDoc = await getDocs(donationQuery);
+
+    const donationData = donationDoc.docs[0].data();
+    const newAmount =
+      Number(donationData.donation_amount) + Number(donation_amount);
+
+      console.log('new amount', newAmount)
+    const donationRef = doc(db, "donation", donationDoc.docs[0].id);
+
+    await updateDoc(donationRef, {
+      donation_amount: Number(newAmount),
+    });
 
     console.log(`Transaction created with ID: ${transaction}`);
 
@@ -102,6 +123,9 @@ export async function POST(req: Request) {
     return NextResponse.json(response.token);
   } catch (error) {
     console.error("Error in POST handler:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
   }
 }
