@@ -103,14 +103,21 @@ export default function Home() {
               </div>
             </div>
             <div className="w-full sm:w-3/5 space-y-3">
-              <div className="p-4 border border-gray-200 rounded-lg shadow">
-                <h4 className="text-xl font-semibold mb-2">Your Point:</h4>
-                <div className="w-full flex space-x-1">
-                  <h1 className="font-bold text-4xl">{userData?.point || 0}</h1>
-                  <span className="self-end font-semibold text-lg">
-                    {" "}
-                    / {userData?.point > 100 ? "500" : "100"}
-                  </span>
+              <div className="p-4 border border-gray-200 rounded-lg shadow flex justify-between items-center">
+                <div className="flex flex-col">
+                  <h4 className="text-xl font-semibold mb-2">Your Point:</h4>
+                  <div className="w-full flex space-x-1">
+                    <h1 className="font-bold text-4xl">
+                      {userData?.point || 0}
+                    </h1>
+                  </div>
+                </div>
+                <div className="">
+                  <Link href="/voucher">
+                    <Button className="bg-blue-600 hover:bg-blue-800 transition-all duration-300">
+                      Claim Vouchers
+                    </Button>
+                  </Link>
                 </div>
               </div>
               <p className="text-sm text-center sm:text-left text-gray-400">
