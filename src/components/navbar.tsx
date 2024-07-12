@@ -33,7 +33,7 @@ const Navbar = () => {
         isScrolled ? "shadow-md" : ""
       }`}
     >
-      <nav className="max-w-6xl mx-auto flex items-center shrink-0 h-20 px-4 xl:px-0">
+      <nav className="max-w-6xl mx-auto flex items-center shrink-0 h-20 px-8 xl:px-0">
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="ghost" size="icon" className="lg:hidden">

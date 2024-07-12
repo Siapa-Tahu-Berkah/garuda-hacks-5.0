@@ -17,7 +17,7 @@ const Shop = () => {
       setLoading(true);
       const fetchedItems = await fetchItems();
       console.log(fetchedItems);
-      setLoading(false); 
+      setLoading(false);
     };
 
     fetchData();
@@ -34,18 +34,7 @@ const Shop = () => {
   };
 
   return (
-    <div className="max-w-6xl px-4 xl:px-0 mx-auto my-20">
-      <div className="flex justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-[#4b4b4b] mb-4">Items</h2>
-        </div>
-        <div>
-          <button className="bg-[#4b4b4b] text-white px-4 py-2 rounded-lg">
-            Add Item
-          </button>
-        </div>
-      </div>
-
+    <>
       {loading && (
         <div className="min-h-[500px] flex justify-center items-center">
           <Bars
@@ -63,13 +52,13 @@ const Shop = () => {
       {!loading && items.length > 0 && (
         <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {items.map((item) => (
-            <Link key={item.id} href={`/items/${item.id}`}>
+            <Link key={item.id} href={`/shop/${item.id}`}>
               <ItemCard {...item} />
             </Link>
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
