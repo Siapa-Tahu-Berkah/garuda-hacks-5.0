@@ -44,14 +44,14 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between pb-32">
       <div className="z-10 w-full items-center justify-between">
-        <div className="relative h-96">
-          <Image src={village} alt="Donation" layout="fill" objectFit="cover" />
+        <div className="relative h-[500px]">
+          <Image src={village} alt="village" layout="fill" objectFit="cover" />
           <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2">
             <h2 className="text-white text-4xl font-bold">Let&apos;s Donate!</h2>
             <h4 className="text-white text-xl font-normal">Create your own happiness to keep you at peace</h4>
             <div className="flex space-x-4 pt-4">
-              <Button variant="outline">Donate</Button>
-              <Button variant="outline">Documentation</Button>
+              <Button className="bg-blue-600 hover:bg-blue-600 text-white">Donate</Button>
+              <Button className="bg-white text-black">Documentation</Button>
             </div>
           </div>
         </div>
@@ -80,13 +80,13 @@ export default function Home() {
                 <div className="p-5 border-gray-300 rounded-lg bg-gray-50">
                   <p className="text-sm font-semibold text-gray-600">Donation</p>
                 </div>
-                <div className="p-4 border border-gray-300 rounded-lg bg-gray-50">
+                <div className="p-5 border border-gray-300 rounded-lg bg-gray-50">
                   <p className="text-sm font-semibold text-gray-600">Purchased</p>
                 </div>
               </div>
             </div>
             <div className="w-3/5 space-y-3">
-              <div className="p-4 border border-gray-200 rounded-lg shadow">
+              <div className="p-5 border border-gray-200 rounded-lg shadow">
                 <h4 className="text-xl font-semibold mb-2">Current XP</h4>
                 <div className="w-full">
                   <Progress value={progress} />
@@ -108,6 +108,10 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="space-y-4 max-w-6xl mx-auto">
+          <hr className="w-full border-t-2 border-gray-400 mt-20 mb-12" />
+          <h3 className="text-2xl font-semibold text-center">Shop</h3>
         </div>
       </div>
     </main>
