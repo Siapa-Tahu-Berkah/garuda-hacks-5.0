@@ -10,6 +10,7 @@ import Lottie from "lottie-react";
 import animationData1 from "@/assets/donation-animation.json";
 import animationData2 from "@/assets/good-animation.json";
 import { initializeApp } from "firebase/app";
+import Shop from "@/components/shop";
 
 export default function Home() {
   const [progress, setProgress] = React.useState(13);
