@@ -64,34 +64,34 @@ const DonationPage = () => {
           try {
             // First, send the payment notification
             console.log("Sending payment notification...");
-            const notificationResponse = await fetch("/api/ticket/payment/notification", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(res),
-            });
-            if (notificationResponse.ok) {
-              console.log("Notification sent successfully");
-            } else {
-              console.error("Failed to send notification. Status:", notificationResponse.status, "Error:", await notificationResponse.text());
-            }
+            // const notificationResponse = await fetch("/api/ticket/payment/notification", {
+            //   method: "POST",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+            //   body: JSON.stringify(res),
+            // });
+            // if (notificationResponse.ok) {
+            //   console.log("Notification sent successfully");
+            // } else {
+            //   console.error("Failed to send notification. Status:", notificationResponse.status, "Error:", await notificationResponse.text());
+            // }
 
-            console.log("Updating donation amount...");
-            const updateResponse = await fetch("/api/donate", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ donation_amount: amount, action: "update_donation" }),
-            });
+            // console.log("Updating donation amount...");
+            // const updateResponse = await fetch("/api/donate", {
+            //   method: "POST",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+            //   body: JSON.stringify({ donation_amount: amount, action: "update_donation" }),
+            // });
 
-            if (updateResponse.ok) {
-              const result = await updateResponse.json();
-              console.log("Donation updated. New total:", result.newAmount, "Donation number:", result.newDonationNumber);
-            } else {
-              console.error("Failed to update donation amount. Status:", updateResponse.status, "Error:", await updateResponse.text());
-            }
+            // if (updateResponse.ok) {
+            //   const result = await updateResponse.json();
+            //   console.log("Donation updated. New total:", result.newAmount, "Donation number:", result.newDonationNumber);
+            // } else {
+            //   console.error("Failed to update donation amount. Status:", updateResponse.status, "Error:", await updateResponse.text());
+            // }
           } catch (error) {
             console.error("Error in onSuccess handler:", error);
             if (error instanceof TypeError && error.message === "Failed to fetch") {
