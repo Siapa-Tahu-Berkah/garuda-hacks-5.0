@@ -90,7 +90,6 @@ export default function Home() {
                   <Progress value={progress} />
                 </div>
               </div>
-
               <p className="text-sm text-center sm:text-left text-gray-400">
                 It is very important to know who you are. To make decisions. To
                 show who you are.
