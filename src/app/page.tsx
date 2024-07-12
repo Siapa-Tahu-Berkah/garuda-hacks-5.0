@@ -19,6 +19,7 @@ export default function Home() {
   const [progress, setProgress] = React.useState(13);
   const [user_id, setUserId] = React.useState<string | null>(null);
   const [user_name, setUserName] = React.useState<string | null>("");
+  const [userData, setUser] = React.useState<any>({});
 
   const getUser = async () => {
     const user_id = Cookies.get("id");
