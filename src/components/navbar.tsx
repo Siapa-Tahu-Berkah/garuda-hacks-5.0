@@ -11,6 +11,7 @@ import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import Cookies from "js-cookie";
 import { TbShoppingCart } from "react-icons/tb";
+import { FaRegUser } from "react-icons/fa";
 const MenuIcon = (props: any) => {
   return (
     <svg
@@ -168,7 +169,7 @@ const Navbar = () => {
           <Link href="/cart">
               <TbShoppingCart className="w-6 h-6 text-black" />
           </Link>
-          {user_id && (
+          {user_id ? (
             <Button variant="ghost" className="flex items-center p-0 w-8 h-8">
               <img
                 src={user_photo || "/image/profile/default-profile-photo.jpg"}
@@ -176,6 +177,10 @@ const Navbar = () => {
                 className="object-cover w-8 h-8 rounded-full"
               />
             </Button>
+          ) : (
+            <Link href="/login" prefetch={false}>
+              <FaRegUser className="w-5 h-5 text-black" />
+            </Link>
           )}
         </div>
       </nav>

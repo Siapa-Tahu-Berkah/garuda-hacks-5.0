@@ -52,10 +52,9 @@ const Countdown: NextPage = () => {
         <>
           <div className="flex justify-center items-center space-x-2">
             {time.map((t, index) => (
-              <>
+              <div key={index}>
                 <div
                   className="flex flex-col justify-center items-center"
-                  key={index}
                 >
                   <div className="mt-2 p-2 bg-[#1d3557] w-12 h-12 flex justify-center items-center text-white">{t}</div>
                   <div className="label font-semibold">
@@ -70,7 +69,7 @@ const Countdown: NextPage = () => {
                   </div>
                 </div>
                 {index < time.length - 1 && <span className="divider">:</span>}
-              </>
+              </div>
             ))}
           </div>
         </>
